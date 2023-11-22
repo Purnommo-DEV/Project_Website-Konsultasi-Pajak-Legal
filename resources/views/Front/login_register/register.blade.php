@@ -1,0 +1,181 @@
+@extends('Front.layout.master', ['title' => 'Register'])
+@section('konten')
+    <div class="container-fluid appointment my-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-5 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="border-start border-5 border-primary ps-4 mb-5">
+                        <h6 class="text-white text-uppercase mb-2">Register</h6>
+                        <h1 class="display-6 text-white mb-0">
+                            Silahkan Mengisi Form Yang Tersedia
+                        </h1>
+                    </div>
+                    <p class="text-white mb-0">
+                        Lengkapi kolom yang telah di sediakan dengan benar jika ingin mendaftarkan diri, jika telah memiliki
+                        akun silahkan menekan tombol masuk.
+                    </p>
+                    <a href="{{ route('HalamanLogin') }}">
+                        Masuk
+                    </a>
+                </div>
+                <div class="col-lg-7 col-md-6 wow fadeIn" data-wow-delay="0.5s">
+                    <form id="form-register-pengguna">
+                        <div class="row g-3">
+                            <div class="col-sm-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-dark border-0" id="nik-id"
+                                        placeholder="Nomor Induk Kependudukan" name="nik" />
+                                    <label for="nik-id">Nomor Induk Kependudukan</label>
+                                    <div class="input-group has-validation">
+                                        <label class="text-danger error-text nik_error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-dark border-0" id="nama-id"
+                                        placeholder="Masukkan Nama Lengkap" name="name" />
+                                    <label for="nama-id">Masukkan Nama Lengkap</label>
+                                    <div class="input-group has-validation">
+                                        <label class="text-danger error-text name_error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-dark border-0" id="email-id"
+                                        placeholder="Email" name="email" />
+                                    <label for="email-id">Email</label>
+                                    <div class="input-group has-validation">
+                                        <label class="text-danger error-text email_error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control bg-dark border-0" id="password-id"
+                                        placeholder="Password" name="password" />
+                                    <label for="password-id">Kata Sandi</label>
+                                    <div class="input-group has-validation">
+                                        <label class="text-danger error-text password_error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        if ($("#form-register-pengguna").length > 0) {
+            $("#form-register-pengguna").validate({
+                rules: {
+                    nik: {
+                        required: true,
+                        maxlength: 16,
+                    },
+                    name: {
+                        required: true,
+                        maxlength: 50,
+                    },
+                    email: {
+                        required: true,
+                        maxlength: 50,
+                    },
+                    password: {
+                        required: true,
+                        maxlength: 50,
+                    }
+                },
+                messages: {
+                    nik: {
+                        required: "<label class='text-danger error-text' style='margin-top:1.6rem !important; font-weight: 500; font-size: 0.7rem;'>Wajib diisi</label>",
+                        maxlength: "The email name should less than or equal to 16 characters",
+                    },
+                    name: {
+                        required: "<label class='text-danger error-text' style='margin-top:1.6rem !important; font-weight: 500; font-size: 0.7rem;'>Wajib diisi</label>",
+                        maxlength: "The email name should less than or equal to 50 characters",
+                    },
+                    email: {
+                        required: "<label class='text-danger error-text' style='margin-top:1.6rem !important; font-weight: 500; font-size: 0.7rem;'>Wajib diisi</label>",
+                        maxlength: "The email name should less than or equal to 50 characters",
+                    },
+                    password: {
+                        required: "<label class='text-danger error-text' style='margin-top:1.6rem !important; font-weight: 500; font-size: 0.7rem;'>Wajib diisi</label>",
+                        maxlength: "The email name should less than or equal to 50 characters",
+                    }
+
+                },
+                submitHandler: function(form) {
+                    var data = new FormData();
+                    // Form data (Input yang ada di FORM, kecuali type file)
+                    var form_data = $('#form-register-pengguna').serializeArray();
+                    $.each(form_data, function(key, input) {
+                        data.append(input.name, input.value);
+                    });
+
+                    //KASUS : Jika id tidak ditemukan maka ketika menekan tombol submit maka halaman akan reload
+                    // data.append('pengguna_id', id);
+
+                    //Custom data
+                    data.append('key', 'value');
+
+                    // AJAX request
+                    $.ajax({
+                        url: "{{ route('ProsesRegister') }}",
+                        method: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        beforeSend: function() {
+                            $(document).find('label.error-text').text('');
+                        },
+                        success: function(data) {
+                            if (data.status_form_kosong == 1) {
+                                $.each(data.error, function(prefix, val) {
+                                    $('label.' + prefix + '_error').text(val[
+                                        0]);
+                                    // $('span.'+prefix+'_error').text(val[0]);
+                                });
+                            } else if (data.status_berhasil_register == 1) {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter',
+                                            Swal
+                                            .stopTimer)
+                                        toast.addEventListener('mouseleave',
+                                            Swal
+                                            .resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.msg
+                                })
+                                window.location.href = `${data.route}`;
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+@endsection
