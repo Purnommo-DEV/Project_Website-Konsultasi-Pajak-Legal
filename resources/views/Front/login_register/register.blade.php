@@ -27,7 +27,8 @@
                                         placeholder="Nomor Induk Kependudukan" name="nik" />
                                     <label for="nik-id">Nomor Induk Kependudukan</label>
                                     <div class="input-group has-validation">
-                                        <label class="text-danger error-text nik_error"></label>
+                                        <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                error-text nik_error"></label>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +38,8 @@
                                         placeholder="Masukkan Nama Lengkap" name="name" />
                                     <label for="nama-id">Masukkan Nama Lengkap</label>
                                     <div class="input-group has-validation">
-                                        <label class="text-danger error-text name_error"></label>
+                                        <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                error-text name_error"></label>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +49,8 @@
                                         placeholder="Email" name="email" />
                                     <label for="email-id">Email</label>
                                     <div class="input-group has-validation">
-                                        <label class="text-danger error-text email_error"></label>
+                                        <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                error-text email_error"></label>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +60,8 @@
                                         placeholder="Password" name="password" />
                                     <label for="password-id">Kata Sandi</label>
                                     <div class="input-group has-validation">
-                                        <label class="text-danger error-text password_error"></label>
+                                        <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                error-text password_error"></label>
                                     </div>
                                 </div>
                             </div>

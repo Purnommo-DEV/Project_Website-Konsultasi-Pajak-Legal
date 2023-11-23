@@ -33,10 +33,13 @@
                         <div class="card-body" style="padding: 1.5rem; margin-top: -1rem;">
                             <div class="grid">
                                 @include('Admin.paket_bundling_pajak._form_tambah_jenis_pb_pajak_c1')
+                                @include('Admin.paket_bundling_pajak._form_edit_jenis_pb_pajak_c1')
                             </div>
                             @include('Admin.paket_bundling_pajak._data_pb_pajak')
                             @include('Admin.paket_bundling_pajak._form_tambah_sub_jenis_pb_pajak_c2')
+                            @include('Admin.paket_bundling_pajak._form_edit_sub_jenis_pb_pajak_c2')
                             @include('Admin.paket_bundling_pajak._form_tambah_sub_jenis_pb_pajak_c3')
+                            @include('Admin.paket_bundling_pajak._form_edit_sub_jenis_pb_pajak_c3')
                         </div>
                     </div>
                 </div>
@@ -46,234 +49,41 @@
 @endsection
 @section('script')
     <script>
-        let daftar_data_paket_bundling_pajak = [];
-        const table_data_paket_bundling_pajak = $('#table-data-paket-bundling-pajak').DataTable({
-            "destroy": true,
-            "pageLength": 10,
-            "lengthMenu": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bInfo": true,
-            "processing": true,
-            "bServerSide": true,
-            "responsive": false,
-            "sScrollX": '100%',
-            "sScrollXInner": "100%",
-            ajax: {
-                url: "{{ route('admin.DataPaketBundlingPajak') }}",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                // data: function(d) {
-                //     d.role_pengguna = data_role_pengguna;
-                //     d.jurusan_pengguna = data_filter_jurusan;
-                //     return d
-                // }
-            },
-            columnDefs: [{
-                    targets: '_all',
-                    visible: true
-                },
-                {
-                    "targets": 0,
-                    "class": "text-nowrap text-center",
-                    "render": function(data, type, row, meta) {
-                        let i = 1;
-                        daftar_data_paket_bundling_pajak[row.id] = row;
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    "targets": 1,
-                    "class": "text-wrap text-center",
-                    "render": function(data, type, row, meta) {
-                        daftar_data_paket_bundling_pajak[row.id] = row;
-                        return row.p_b_pajak;
-                    }
-                },
-                {
-                    "targets": 2,
-                    "class": "text-wrap text-center",
-                    "render": function(data, type, row, meta) {
-                        daftar_data_paket_bundling_pajak[row.id] = row;
-                        return `<img src="/storage/${row.path}" width="100">`
-                    }
-                },
-                {
-                    "targets": 3,
-                    "class": "text-nowrap text-center",
-                    "render": function(data, type, row, meta) {
-                        let tampilan;
-                        tampilan = `
-                                <div class="ms-auto">
-                                    <button type="button" class="btn btn-success btn-sm" href="/admin/detail-paket-bundling-pajak/${row.slug}">Detail</button>
-                                    <button type="button" class="btn btn-warning btn-sm edit_paket_bundling_pajak" data-id = "${row.id}" href="#!">Edit</button>
-                                    <button type="button" class="btn btn-danger btn-sm hapus_paket_bundling_pajak" data-id = "${row.id}" href="#!">Hapus</button>
-                                </div>
-                                `
-                        // <a class="btn btn-link text-dark text-gradient px-3 mb-0 edit_paket_bundling_pajak" id-paket-pajak = "${row.id}" href="#!" ><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Ubah</a>
-                        return tampilan;
-                    }
-                },
-            ]
+        $('.batal').on('click', function() {
+            $(document).find('label.error-text').text('');
+            $("#form-tambah-jenis-pb-pajak-child-1").trigger('reset');
+            $("#form-edit-jenis-pb-pajak-child-1").trigger('reset');
+
+            $("#form-tambah-sub-jenis-pb-pajak-child-2").trigger('reset');
+            $("#form-edit-sub-jenis-pb-pajak-child-2").trigger('reset');
+
+            $("#form-tambah-sub-jenis-pb-pajak-child-3").trigger('reset');
+            $("#form-edit-sub-jenis-pb-pajak-child-3").trigger('reset');
+        })
+
+        var tambah_tarif = document.getElementById(`tambah_tarif_pb_child3`);
+        tambah_tarif.addEventListener('keyup', function(e) {
+            tambah_tarif.value = formatRupiah(this.value, 'Rp. ');
         });
 
-        $('#formTambahDataPaketBundlingPajak').on('submit', function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: new FormData(this),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                cache: false,
-                beforeSend: function() {
-                    $(document).find('label.error-text').text('');
-                },
-                success: function(data) {
-                    if (data.status_form_kosong == 1) {
-                        $.each(data.error, function(prefix, val) {
-                            $('label.' + prefix + '_error').text(val[0]);
-                            // $('span.'+prefix+'_error').text(val[0]);
-                        });
-                    } else if (data.status_berhasil_tambah == 1) {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal
-                                    .stopTimer)
-                                toast.addEventListener('mouseleave', Swal
-                                    .resumeTimer)
-                            }
-                        })
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: data.msg
-                        })
-                        table_data_paket_bundling_pajak.draw();
-                        $("#formTambahDataPaketBundlingPajak").trigger('reset');
-                        $("#modalTambahDataPaketBundlingPajak").modal('hide')
-                    }
-                },
-            });
+        var edit_tarif = document.getElementById(`edit_tarif_pb_child3`);
+        edit_tarif.addEventListener('keyup', function(e) {
+            edit_tarif.value = formatRupiah(this.value, 'Rp. ');
         });
 
-        $('body').on('click', '.edit_paket_bundling_pajak', function() {
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-            let paket_bundling_pajak_id = $(this).data('id');
-            //fetch detail post with ajax
-            $.ajax({
-                url: `/admin/tampil-data-paket-bundling-pajak/${paket_bundling_pajak_id}`,
-                type: "GET",
-                cache: false,
-                success: function(response) {
-
-                    //fill data to form
-                    $('#paket_bundling_pajak_id').val(response.data.id);
-                    $('#pb_pajak').val(response.data.p_b_pajak);
-
-                    //open modal
-                    $('#modalEditDataPaketBundlingPajak').modal('show');
-                }
-            });
-        });
-
-        $("#formEditDataPaketBundlingPajak").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            $.ajax({
-                url: "{{ route('admin.ProsesEditPaketBundlingPajak') }}",
-                method: 'post',
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                success: function(data) {
-                    if (data.status_form_kosong == 1) {
-                        $.each(data.error, function(prefix, val) {
-                            $('label.' + prefix + '_error').text(val[0]);
-                            // $('span.'+prefix+'_error').text(val[0]);
-                        });
-                    } else if (data.status_berhasil_ubah == 1) {
-                        $("#modalEditDataPaketBundlingPajak").modal('hide');
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal
-                                    .stopTimer)
-                                toast.addEventListener('mouseleave', Swal
-                                    .resumeTimer)
-                            }
-                        })
-                        Toast.fire({
-                            icon: 'success',
-                            title: data.msg
-                        })
-                        $("#formEditDataPaketBundlingPajak")[0].reset();
-                        table_data_paket_bundling_pajak.ajax.reload(null, false);
-                    }
-                }
-            });
-        });
-
-        $(document).on('click', '.hapus_paket_bundling_pajak', function(event) {
-            const id = $(this).data('id');
-
-            Swal.fire({
-                title: 'Yakin ingin mengahpus data ini?',
-                icon: 'warning',
-                showDenyButton: true,
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                        url: "/admin/hapus-data-paket-bundling-pajak/" + id,
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data.status_berhasil_hapus == 1) {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter',
-                                            Swal
-                                            .stopTimer)
-                                        toast.addEventListener('mouseleave',
-                                            Swal
-                                            .resumeTimer)
-                                    }
-                                })
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: data.msg
-                                })
-                                table_data_paket_bundling_pajak.ajax.reload(null, false);
-                            }
-                        }
-                    });
-                }
-            });
-        });
-
-        // function loader() {
-        //     let card = document.querySelectorAll('.placeholder');
-        //     card.forEach(checkcard => {
-        //         checkcard.classList.remove('placeholder');
-        //     })
-        // }
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('p_b_pajak_child_3', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('p_b_pajak_child_2_id')->constrained('p_b_pajak_child_1')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('p_b_pajak_child_2_id')->constrained('p_b_pajak_child_2')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('p_pajak_id')->constrained('p_pajak')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('tarif');
-            $table->string('total');
             $table->timestamps();
         });
     }

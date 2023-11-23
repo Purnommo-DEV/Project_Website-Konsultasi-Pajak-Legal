@@ -6,9 +6,10 @@
         <div class="accordion-item my-3 shadow">
             <h2 class="accordion-header">
                 <div class="btn-group col-md-12" role="group">
-                    <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pen"></i></button>
-                    <button class="btn btn-sm btn-outline-danger btn-hapus-materi" materi-id="{{ $item_1->id }}"><i
-                            class="bi bi-trash"></i></button>
+                    <button class="btn btn-sm btn-outline-warning btn-ubah-detail-pb-pajak-child-1"
+                        pb-pajak-child-1-id="{{ $item_1->id }}"><i class="bi bi-pen"></i></button>
+                    <button class="btn btn-sm btn-outline-danger btn-hapus-detail-pb-pajak-child-1"
+                        pb-pajak-child-1-id="{{ $item_1->id }}"><i class="bi bi-trash"></i></button>
                     <button class="btn btn-sm btn-outline-primary btn-tambah-sub-jenis-pb-pajak-child-2"
                         pb-pajak-child-1-id="{{ $item_1->id }}"><i class="bi bi-plus"></i></button>
 
@@ -38,10 +39,13 @@
                                             class="btn btn-sm btn-outline-primary btn-tambah-sub-jenis-pb-pajak-child-3"
                                             pb-pajak-child-2-id="{{ $item_2->id }}"><i
                                                 class="bi bi-plus"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
+                                        <button
+                                            class="btn btn-sm btn-outline-warning btn-edit-sub-jenis-pb-pajak-child-2"
+                                            pb-pajak-child-2-id="{{ $item_2->id }}"><i class="bi bi-pen"></i></button>
+                                        <button
+                                            class="btn btn-sm btn-outline-danger btn-hapus-sub-jenis-pb-pajak-child-2"
+                                            pb-pajak-child-2-id="{{ $item_2->id }}"><i
                                                 class="bi bi-trash"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i
-                                                class="bi bi-pen"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -59,15 +63,16 @@
                                             @foreach ($data_paket_bundling_pajak_child_3 as $item_3)
                                                 <tr>
                                                     <td scope="row">{{ $item_3->relasi_pajak->paket }}</td>
-                                                    <td scope="row">{{ $item_3->tarif }}</td>
+                                                    <td scope="row">{{ help_format_rupiah($item_3->tarif) }}</td>
                                                     <td scope="row">
-                                                        <a href="javascript:void(0)" class="btn btn-sm btn-warning"
-                                                            id="btn-edit-sub-materi" data-id="{{ $item_3->id }}"><i
-                                                                class="bi bi-pen"></i></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="btn btn-sm btn-danger btn-hapus-sub-materi"
-                                                            data-id="{{ $item_3->id }}"><i
-                                                                class="bi bi-trash"></i></a>
+                                                        <button
+                                                            class="btn btn-sm btn-warning btn-edit-sub-jenis-pb-pajak-child-3"
+                                                            pb-pajak-child-3-id="{{ $item_3->id }}"><i
+                                                                class="bi bi-pen"></i></button>
+                                                        <button
+                                                            class="btn btn-sm btn-danger btn-hapus-sub-jenis-pb-pajak-child-3"
+                                                            pb-pajak-child-3-id="{{ $item_3->id }}"><i
+                                                                class="bi bi-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -84,8 +89,8 @@
 </div>
 @push('script')
     <script>
-        $(document).on('click', '.btn-hapus-materi', function(event) {
-            const id = $(event.currentTarget).attr('materi-id');
+        $(document).on('click', '.btn-hapus-detail-pb-pajak-child-1', function(event) {
+            const id = $(event.currentTarget).attr('pb-pajak-child-1-id');
             Swal.fire({
                 title: 'Yakin ingin mengahpus data ini?',
                 icon: 'warning',
@@ -93,12 +98,12 @@
             }).then(function(result) {
                 if (result.value) {
                     $.ajax({
-                        url: "/admin/hapus-data-materi/" + id,
+                        url: "/admin/hapus-data-paket-bundling-pajak-child1/" + id,
                         dataType: 'json',
                         success: function(data) {
                             if (data.status == 0) {
                                 alert("Gagal Hapus")
-                            } else if (data.status_hapus_materi == 1) {
+                            } else if (data.status_berhasil_hapus == 1) {
                                 const Toast = Swal.mixin({
                                     toast: true,
                                     position: 'top-end',
@@ -116,8 +121,8 @@
                                         icon: 'success',
                                         title: data.msg
                                     }),
-                                    $("#daftar-materi").load(location.href +
-                                        " #daftar-materi>*", "");
+                                    $("#daftar-jenis-pb-pajak").load(location.href +
+                                        " #daftar-jenis-pb-pajak>*", "");
                             }
                         }
                     });
@@ -128,8 +133,8 @@
             });
         });
 
-        $(document).on('click', '.btn-hapus-sub-materi', function(event) {
-            let materi_sub_id = $(this).data('id');
+        $(document).on('click', '.btn-hapus-sub-jenis-pb-pajak-child-2', function(event) {
+            const id = $(event.currentTarget).attr('pb-pajak-child-2-id');
             Swal.fire({
                 title: 'Yakin ingin mengahpus data ini?',
                 icon: 'warning',
@@ -137,12 +142,12 @@
             }).then(function(result) {
                 if (result.value) {
                     $.ajax({
-                        url: "/admin/hapus-data-sub-materi/" + materi_sub_id,
+                        url: "/admin/hapus-data-paket-bundling-pajak-child2/" + id,
                         dataType: 'json',
                         success: function(data) {
                             if (data.status == 0) {
                                 alert("Gagal Hapus")
-                            } else if (data.status_hapus_materi == 1) {
+                            } else if (data.status_berhasil_hapus == 1) {
                                 const Toast = Swal.mixin({
                                     toast: true,
                                     position: 'top-end',
@@ -160,8 +165,52 @@
                                         icon: 'success',
                                         title: data.msg
                                     }),
-                                    $("#daftar-materi").load(location.href +
-                                        " #daftar-materi>*", "");
+                                    $("#daftar-jenis-pb-pajak").load(location.href +
+                                        " #daftar-jenis-pb-pajak>*", "");
+                            }
+                        }
+                    });
+                } else {
+                    //alert ('no');
+                    return false;
+                }
+            });
+        });
+
+        $(document).on('click', '.btn-hapus-sub-jenis-pb-pajak-child-3', function(event) {
+            const id = $(event.currentTarget).attr('pb-pajak-child-3-id');
+            Swal.fire({
+                title: 'Yakin ingin mengahpus data ini?',
+                icon: 'warning',
+                showDenyButton: true,
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "/admin/hapus-data-paket-bundling-pajak-child3/" + id,
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.status == 0) {
+                                alert("Gagal Hapus")
+                            } else if (data.status_berhasil_hapus == 1) {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal
+                                            .stopTimer)
+                                        toast.addEventListener('mouseleave', Swal
+                                            .resumeTimer)
+                                    }
+                                })
+                                Toast.fire({
+                                        icon: 'success',
+                                        title: data.msg
+                                    }),
+                                    $("#daftar-jenis-pb-pajak").load(location.href +
+                                        " #daftar-jenis-pb-pajak>*", "");
                             }
                         }
                     });

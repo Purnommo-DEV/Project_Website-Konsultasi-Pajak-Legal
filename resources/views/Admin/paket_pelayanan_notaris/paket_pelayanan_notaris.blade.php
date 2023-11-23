@@ -32,7 +32,9 @@
                                                     <input name="p_pel_notaris" class="form-control"
                                                         placeholder="Masukkan Nama Paket Pelayanan Notaris">
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text p_pel_notaris_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text p_pel_notaris_error"></label>
                                                     </div>
                                                 </div>
 
@@ -41,7 +43,9 @@
                                                     <input type="file" accept="image/*" name="path"
                                                         class="form-control">
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text path_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text path_error"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +102,8 @@
                                 <input name="p_pel_notaris" id="p_pel_notaris" class="form-control"
                                     placeholder="Masukkan Nama Pelayanan Notaris">
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text p_pel_notaris_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text p_pel_notaris_error"></label>
                                 </div>
                             </div>
 
@@ -106,7 +111,8 @@
                                 <label class="col col-form-label" for="path">Gambar</label>
                                 <input type="file" accept="image/*" name="path" id="path" class="form-control">
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text path_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text path_error"></label>
                                 </div>
                             </div>
                         </div>

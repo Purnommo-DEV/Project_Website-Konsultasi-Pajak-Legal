@@ -61,8 +61,20 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/detail-paket-bundling-pajak/{slug}', 'halaman_detail_paket_bundling_pajak')->name('DataMaster.PaketBundlingPajak.DetailPaketBundlingPajak');
             Route::post('/proses-tambah-jenis-pb-pajak', 'proses_tambah_jenis_pb_pajak')->name('ProsesTambahJenisPBPajak_Child1');
-            Route::post('/proses-tambah-sub-jenis-pb-pajak-chil2', 'proses_tambah_sub_jenis_pb_pajak_child2')->name('ProsesTambahSubJenisPBPajak_Child2');
-            Route::post('/proses-tambah-sub-jenis-pb-pajak-chil3', 'proses_tambah_sub_jenis_pb_pajak_child3')->name('ProsesTambahSubJenisPBPajak_Child3');
+            Route::post('/proses-tambah-sub-jenis-pb-pajak-child2', 'proses_tambah_sub_jenis_pb_pajak_child2')->name('ProsesTambahSubJenisPBPajak_Child2');
+            Route::post('/proses-tambah-sub-jenis-pb-pajak-child3', 'proses_tambah_sub_jenis_pb_pajak_child3')->name('ProsesTambahSubJenisPBPajak_Child3');
+
+            Route::get('/hapus-data-paket-bundling-pajak-child1/{pb_child1_id}', 'hapus_data_paket_bundling_pajak_child_1');
+            Route::get('/tampil-data-paket-bundling-pajak-child1/{pb_child1_id}', 'tampil_data_paket_bundling_pajak_child1');
+            Route::post('/proses-edit-paket-bundling-pajak-child1', 'proses_edit_data_paket_bundling_pajak_child1')->name('ProsesEditPaketBundlingPajak_Child1');
+
+            Route::get('/tampil-data-paket-bundling-pajak-child2/{pb_child2_id}', 'tampil_data_paket_bundling_pajak_child2');
+            Route::post('/proses-edit-paket-bundling-pajak-child2', 'proses_edit_data_paket_bundling_pajak_child2')->name('ProsesEditPaketBundlingPajak_Child2');
+            Route::get('/hapus-data-paket-bundling-pajak-child2/{pb_child2_id}', 'hapus_data_paket_bundling_pajak_child2');
+
+            Route::get('/tampil-data-paket-bundling-pajak-child3/{pb_child3_id}', 'tampil_data_paket_bundling_pajak_child3');
+            Route::post('/proses-edit-paket-bundling-pajak-child3', 'proses_edit_data_paket_bundling_pajak_child3')->name('ProsesEditPaketBundlingPajak_Child3');
+            Route::get('/hapus-data-paket-bundling-pajak-child3/{pb_child3_id}', 'hapus_data_paket_bundling_pajak_child3');
         });
 
         Route::controller(Admin_PaketNotarisController::class)->group(function () {

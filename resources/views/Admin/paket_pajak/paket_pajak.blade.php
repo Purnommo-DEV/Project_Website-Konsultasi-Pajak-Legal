@@ -30,7 +30,9 @@
                                                     <input name="paket" class="form-control"
                                                         placeholder="Masukkan Nama Paket">
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text paket_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text paket_error"></label>
                                                     </div>
                                                 </div>
 
@@ -39,7 +41,9 @@
                                                     <input name="tarif" id="tarif" class="form-control"
                                                         placeholder="Masukkan Tarif Paket" />
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text tarif_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text tarif_error"></label>
                                                     </div>
                                                 </div>
 
@@ -47,7 +51,9 @@
                                                     <label class="col col-form-label" for="isi">Isi</label>
                                                     <textarea name="isi" class="form-control" placeholder="Masukkan Isi Paket"></textarea>
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text isi_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text isi_error"></label>
                                                     </div>
                                                 </div>
 
@@ -55,7 +61,9 @@
                                                     <label class="col col-form-label" for="keterangan">Keterangan</label>
                                                     <textarea name="keterangan" class="form-control" placeholder="Masukkan Keterangan Paket"></textarea>
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text keterangan_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text keterangan_error"></label>
                                                     </div>
                                                 </div>
 
@@ -64,7 +72,9 @@
                                                     <input type="file" accept="image/*" name="path"
                                                         class="form-control">
                                                     <div class="input-group has-validation">
-                                                        <label class="text-danger error-text path_error"></label>
+                                                        <label
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                                                error-text path_error"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,7 +134,8 @@
                                 <input name="paket" id="paket" class="form-control"
                                     placeholder="Masukkan Nama Paket">
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text paket_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text paket_error"></label>
                                 </div>
                             </div>
 
@@ -133,7 +144,8 @@
                                 <input name="tarif" id="tarif-ubah" class="form-control"
                                     placeholder="Masukkan Tarif Paket" />
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text tarif_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text tarif_error"></label>
                                 </div>
                             </div>
 
@@ -141,7 +153,8 @@
                                 <label class="col col-form-label" for="isi">Isi</label>
                                 <textarea name="isi" id="isi" class="form-control" placeholder="Masukkan Isi Paket"></textarea>
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text isi_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text isi_error"></label>
                                 </div>
                             </div>
 
@@ -149,7 +162,8 @@
                                 <label class="col col-form-label" for="keterangan">Keterangan</label>
                                 <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Masukkan Keterangan Paket"></textarea>
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text keterangan_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text keterangan_error"></label>
                                 </div>
                             </div>
 
@@ -158,7 +172,8 @@
                                 <input type="file" accept="image/*" name="path" id="path"
                                     class="form-control">
                                 <div class="input-group has-validation">
-                                    <label class="text-danger error-text path_error"></label>
+                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
+                                            error-text path_error"></label>
                                 </div>
                             </div>
                         </div>

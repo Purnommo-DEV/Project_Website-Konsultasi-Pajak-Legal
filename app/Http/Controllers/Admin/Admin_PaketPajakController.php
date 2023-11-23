@@ -66,7 +66,7 @@ class Admin_PaketPajakController extends Controller
                 'paket' => $request->paket,
                 'slug' => Str::slug($request->paket),
                 'isi' => $request->isi,
-                'tarif' => str_replace(['Rp. ', '.', '.'], ['', '', ''], $request->tarif),
+                'tarif' => help_hapus_format_rupiah($request->tarif),
                 'keterangan' => $request->keterangan,
                 'path' => $path
             ]);
