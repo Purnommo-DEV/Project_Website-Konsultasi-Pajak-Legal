@@ -3,7 +3,7 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card" style="box-shadow:0 0 7px 0 rgba(30,5,0,0.15); border-radius:10px;">
                     <div class="card-body">
                         <button type="button" class="btn btn-light btn-sm mt-2 mb-2" href="#" data-bs-toggle="modal"
                             data-bs-target="#modalTambahDataPaketPajak"><i class="bi bi-plus"></i> Tambah Paket
@@ -20,8 +20,7 @@
                                             <i data-feather="x"></i>
                                         </button>
                                     </div>
-                                    <form action="{{ route('admin.TambahDataPaketPajak') }}" id="formTambahDataPaketPajak"
-                                        method="POST" enctype="multipart/form-data">
+                                    <form id="formTambahDataPaketPajak" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="col">
@@ -31,19 +30,22 @@
                                                         placeholder="Masukkan Nama Paket">
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text paket_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                                            class="text-danger error-text paket_error"></label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="col col-form-label" for="tarif">Tarif</label>
-                                                    <input name="tarif" id="tarif" class="form-control"
-                                                        placeholder="Masukkan Tarif Paket" />
-                                                    <div class="input-group has-validation">
-                                                        <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text tarif_error"></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">Rp</span>
+                                                        <input name="tarif" id="tambah_tarif" class="form-control"
+                                                            placeholder="Masukkan Tarif Paket" />
+                                                        <div class="input-group has-validation">
+                                                            <label
+                                                                style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                                                class="text-danger error-text tarif_error"></label>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -52,8 +54,8 @@
                                                     <textarea name="isi" class="form-control" placeholder="Masukkan Isi Paket"></textarea>
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text isi_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                                            class="text-danger error-text isi_error"></label>
                                                     </div>
                                                 </div>
 
@@ -62,19 +64,19 @@
                                                     <textarea name="keterangan" class="form-control" placeholder="Masukkan Keterangan Paket"></textarea>
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text keterangan_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                                            class="text-danger error-text keterangan_error"></label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="col col-form-label" for="path">Gambar</label>
-                                                    <input type="file" accept="image/*" name="path"
-                                                        class="form-control">
+                                                    <input type="file" accept="image/png, image/jpeg, image/jpg"
+                                                        name="path" id="edit_p_pajak" class="form-control">
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text path_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                                            class="text-danger error-text path_error"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,8 +88,11 @@
                                                 data-bs-dismiss="modal">
                                                 Batal
                                             </button>
-                                            <button type="submit" class="btn btn-primary ml-1">
-                                                Simpan
+                                            <button type="submit" class="btn btn-primary ml-1"
+                                                id="button-tambah-paket-pajak">
+                                                <i id="icon-button-tambah-paket-pajak"></i>
+                                                <span id="text-tambah-paket-pajak" class="d-none d-sm-block">
+                                                    Simpan</span>
                                             </button>
                                         </div>
                                     </form>
@@ -125,8 +130,8 @@
                     </button>
                 </div>
                 <form id="formEditDataPaketPajak" enctype="multipart/form-data">
-                    <input type="hidden" name="paket_pajak_id" id="paket_pajak_id" hidden>
                     @csrf
+                    <input type="hidden" name="paket_pajak_id" id="paket_pajak_id" hidden>
                     <div class="modal-body">
                         <div class="col">
                             <div class="form-group">
@@ -134,18 +139,21 @@
                                 <input name="paket" id="paket" class="form-control"
                                     placeholder="Masukkan Nama Paket">
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text paket_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text paket_error"></label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col col-form-label" for="tarif">Tarif</label>
-                                <input name="tarif" id="tarif-ubah" class="form-control"
-                                    placeholder="Masukkan Tarif Paket" />
-                                <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text tarif_error"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                                    <input name="tarif" id="ubah_tarif" class="form-control"
+                                        placeholder="Masukkan Tarif Paket" />
+                                    <div class="input-group has-validation">
+                                        <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600;"
+                                            class="text-danger error-text tarif_error"></label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -153,8 +161,8 @@
                                 <label class="col col-form-label" for="isi">Isi</label>
                                 <textarea name="isi" id="isi" class="form-control" placeholder="Masukkan Isi Paket"></textarea>
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text isi_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text isi_error"></label>
                                 </div>
                             </div>
 
@@ -162,18 +170,18 @@
                                 <label class="col col-form-label" for="keterangan">Keterangan</label>
                                 <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Masukkan Keterangan Paket"></textarea>
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text keterangan_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text keterangan_error"></label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col col-form-label" for="path">Gambar</label>
-                                <input type="file" accept="image/*" name="path" id="path"
-                                    class="form-control">
+                                <input type="file" accept="image/png, image/jpeg, image/jpg" name="path"
+                                    id="edit_p_pajak" class="form-control">
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text path_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text path_error"></label>
                                 </div>
                             </div>
                         </div>
@@ -183,8 +191,10 @@
                         <button type="button" class="btn btn-light-secondary batal" data-bs-dismiss="modal">
                             Batal
                         </button>
-                        <button type="submit" class="btn btn-primary ml-1">
-                            Simpan
+                        <button type="submit" class="btn btn-primary ml-1" id="button-edit-paket-pajak">
+                            <i id="icon-button-edit-paket-pajak"></i>
+                            <span id="text-edit-paket-pajak" class="d-none d-sm-block">
+                                Simpan</span>
                         </button>
                     </div>
                 </form>
@@ -194,6 +204,16 @@
 @endsection
 @section('script')
     <script>
+        $('#tambah_tarif, #ubah_tarif').mask('#.##0', {
+            reverse: true
+        });
+
+        $('.batal').on('click', function() {
+            $(document).find('label.error-text').text('');
+            $("#formTambahDataPaketPajak").trigger('reset');
+            $("#formEditDataPaketPajak").trigger('reset');
+        })
+
         let daftar_data_paket_pajak = [];
         const table_data_paket_pajak = $('#table-data-paket-pajak').DataTable({
             "destroy": true,
@@ -292,9 +312,13 @@
 
         $('#formTambahDataPaketPajak').on('submit', function(e) {
             e.preventDefault();
+            var $search = $("#icon-button-tambah-paket-pajak")
+            $("#icon-button-tambah-paket-pajak").addClass("fa fa-spinner fa-spin")
+            $("#text-tambah-paket-pajak").html('')
+            $("#button-tambah-paket-pajak").prop('disabled', true);
             $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
+                url: "{{ route('admin.TambahDataPaketPajak') }}",
+                method: "POST",
                 data: new FormData(this),
                 processData: false,
                 dataType: 'json',
@@ -309,7 +333,14 @@
                             $('label.' + prefix + '_error').text(val[0]);
                             // $('span.'+prefix+'_error').text(val[0]);
                         });
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-tambah-paket-pajak").html(
+                            '<span id="text-tambah-paket-pajak" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-tambah-paket-pajak").prop('disabled', false);
                     } else if (data.status == 1) {
+                        $("#formTambahDataPaketPajak").trigger('reset');
+                        $("#modalTambahDataPaketPajak").modal('hide')
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -328,9 +359,13 @@
                             icon: 'success',
                             title: data.msg
                         })
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-tambah-paket-pajak").html(
+                            '<span id="text-tambah-paket-pajak" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-tambah-paket-pajak").prop('disabled', false);
+                        $(document).find('label.error-text').text('');
                         table_data_paket_pajak.draw();
-                        $("#formTambahDataPaketPajak").trigger('reset');
-                        $("#modalTambahDataPaketPajak").modal('hide')
                     }
                 },
             });
@@ -348,7 +383,7 @@
                     //fill data to form
                     $('#paket_pajak_id').val(response.data.id);
                     $('#paket').val(response.data.paket);
-                    $('#tarif-ubah').val(response.data.tarif);
+                    $('#ubah_tarif').val(response.data.tarif);
                     $('#isi').val(response.data.isi);
                     $('#keterangan').val(response.data.keterangan);
 
@@ -360,11 +395,14 @@
 
         $("#formEditDataPaketPajak").submit(function(e) {
             e.preventDefault();
-            const fd = new FormData(this);
+            var $search = $("#icon-button-edit-paket-pajak")
+            $("#icon-button-edit-paket-pajak").addClass("fa fa-spinner fa-spin")
+            $("#text-edit-paket-pajak").html('')
+            $("#button-edit-paket-pajak").prop('disabled', true);
             $.ajax({
                 url: "{{ route('admin.ProsesEditPaketPajak') }}",
-                method: 'post',
-                data: fd,
+                method: "POST",
+                data: new FormData(this),
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -375,8 +413,14 @@
                             $('label.' + prefix + '_error').text(val[0]);
                             // $('span.'+prefix+'_error').text(val[0]);
                         });
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-edit-paket-pajak").html(
+                            '<span id="text-edit-paket-pajak" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-edit-paket-pajak").prop('disabled', false);
                     } else if (data.status_berhasil_ubah == 1) {
                         $("#modalEditDataPaketPajak").modal('hide');
+                        $("#formEditDataPaketPajak")[0].reset();
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -394,7 +438,12 @@
                             icon: 'success',
                             title: data.msg
                         })
-                        $("#formEditDataPaketPajak")[0].reset();
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-edit-paket-pajak").html(
+                            '<span id="text-edit-paket-pajak" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-edit-paket-pajak").prop('disabled', false);
+                        $(document).find('label.error-text').text('');
                         table_data_paket_pajak.ajax.reload(null, false);
                     }
                 }
@@ -442,29 +491,30 @@
             });
         });
 
-        var tarif = document.getElementById(`tarif`);
-        tarif.addEventListener('keyup', function(e) {
-            tarif.value = formatRupiah(this.value, 'Rp. ');
+        $(document).ready(function(e) {
+            $("#edit_p_pajak, #tambah_p_pajak").change(function() {
+                let file = this.files[0];
+                let reader = new FileReader();
+                var ext = $('#edit_p_pajak, #tambah_p_pajak').val().split('.').pop()
+                    .toLowerCase();
+                if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
+                    $(document).find('label.error-text.path_error').html(
+                        "<label style='margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; 'class='text-danger error-text path_error'>Format gambar yang diizinkan jpeg, jpg dan png</label>"
+                    );
+                    $("#edit_p_pajak, #tambah_p_pajak").val(null);
+                } else {
+                    if (file['size'] < 1111775) {
+                        $(document).find('label.error-text.path_error').text('');
+                        reader.readAsDataURL(this.files[0]);
+                    } else if (file['size'] > 1111775) {
+                        $(document).find('label.error-text.path_error').html(
+                            "<label style='margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; 'class='text-danger error-text path_error'>Ukuran gambar maksimal 1MB</label>"
+                        );
+                        $("#edit_p_pajak, #tambah_p_pajak").val(null);
+                    }
+                }
+            });
         });
 
-        var tarif_ubah = document.getElementById(`tarif-ubah`);
-        tarif_ubah.addEventListener('keyup', function(e) {
-            tarif_ubah.value = formatRupiah(this.value, 'Rp. ');
-        });
-
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        }
     </script>
 @endsection

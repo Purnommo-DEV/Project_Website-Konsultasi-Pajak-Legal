@@ -43,11 +43,9 @@ class Admin_PaketBundlingPajakController extends Controller
     public function tambah_paket_bundling_pajak(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'p_b_pajak' => 'required',
-            'path' => 'required',
+            'p_b_pajak' => 'required'
         ], [
-            'p_b_pajak.required' => 'Wajib diisi',
-            'path.required' => 'Wajib diisi',
+            'p_b_pajak.required' => 'Wajib diisi'
         ]);
 
         if (!$validator->passes()) {
@@ -66,7 +64,7 @@ class Admin_PaketBundlingPajakController extends Controller
             $tambah_paket_bundling_pajak = PaketBundlingPajak::create([
                 'p_b_pajak' => $request->p_b_pajak,
                 'slug' => Str::slug($request->p_b_pajak),
-                'path' => $path
+                'path' => $path ?? null
             ]);
 
             if (!$tambah_paket_bundling_pajak) {
@@ -287,8 +285,8 @@ class Admin_PaketBundlingPajakController extends Controller
             'req_pb_pajak_child_1_id' => 'required|numeric'
         ], [
             'p_b_pajak_child_2.required' => 'Wajib diisi',
-            'path.mimes' => 'Format gambar yang diizinkan jpeg, jpg dan png',
             'req_pb_pajak_child_1_id.numeric' => 'Wajib berisi angka',
+            'path.mimes' => 'Format gambar yang diizinkan jpeg, jpg dan png',
             'path.max' => 'Ukuran gambar maksimal 1MB'
         ]);
 

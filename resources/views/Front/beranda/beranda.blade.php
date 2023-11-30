@@ -90,17 +90,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row g-3 justify-content-center">
+            <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
 
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="card-deck" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
+                    <div class="card-deck h-100" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
                         <div class="card-body">
                             <div class="row g-1">
                                 <div class="col-sm-6 text-right">
-                                    <img class="img-fluid" src="{{ asset('Front/img/team-1.jpg') }}" alt="" />
+                                    <img class="img-fluid" src="{{ asset('Front/img/team-1.jpg') }}" alt=""
+                                        style="aspect-ratio:1/1;" />
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="card-body" style="height: 86% !important">
+                                    <div class="card-body" style="height: 85% !important">
                                         <h5 class="card-title">Card title</h5>
                                         <p class="card-text"> This content is a little bit longer.This content is a little
                                             bit longer.This content is a little bit longer.</p>
@@ -115,11 +116,12 @@
                 </div>
 
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="card-deck" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
+                    <div class="card-deck h-100" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
                         <div class="card-body">
                             <div class="row g-1">
                                 <div class="col-sm-6 text-right">
-                                    <img class="img-fluid" src="{{ asset('Front/img/team-1.jpg') }}" alt="" />
+                                    <img class="img-fluid" src="{{ asset('Front/img/team-1.jpg') }}" alt=""
+                                        style="aspect-ratio:1/1;" />
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="card-body" style="height: 86% !important">
@@ -137,7 +139,7 @@
                 </div>
 
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="card-deck" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
+                    <div class="card-deck h-100" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
                         <div class="card-body">
                             <div class="row g-1">
                                 <div class="col-sm-6 text-right">
@@ -159,7 +161,7 @@
                 </div>
 
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="card-deck" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
+                    <div class="card-deck h-100" style="border-radius: 10px; box-shadow:0 0 15px 3px rgba(30,5,0,0.15);">
                         <div class="card-body">
                             <div class="row g-1">
                                 <div class="col-sm-6 text-right">

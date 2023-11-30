@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('p_pel_notaris_child_1', function (Blueprint $table) {
+        Schema::create('layanan_satuan_child_2', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('p_pel_notaris_id')->constrained('p_pel_notaris')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('p_pel_notaris_child_1');
-            $table->text('isi');
-            $table->string('tarif');
-            $table->text('path')->nullable();
+            $table->foreignId('layanan_satuan_child_1_id')->constrained('layanan_satuan_child_1')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('layanan_satuan_child_2');
+            $table->text('tarif');
+            $table->string('timeline');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('p_pel_notaris_child_1');
+        Schema::dropIfExists('layanan_satuan_child_2');
     }
 };

@@ -1,7 +1,10 @@
 <?php
 
+use Illuminate\Support\Str;
+
 function help_hapus_spesial_karakter($request_form_input)
 {
+
     // $remove = array("@", "#", "(", ")", "*", "/", "'", "`");
     $hapus  = preg_replace('/[^A-Za-z0-9-_\-]/', ' ', $request_form_input);
     return $hapus;
@@ -11,6 +14,11 @@ function help_tanggal_jam($data)
 {
     return \Carbon\Carbon::parse($data)
         ->isoFormat('dddd, D MMMM Y, H:mm');
+}
+
+function help_batas_karakter($deskripsi)
+{
+    return Str::limit($deskripsi, 50, '...');
 }
 
 function help_format_rupiah($data)

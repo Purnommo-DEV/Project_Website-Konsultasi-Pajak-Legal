@@ -3,10 +3,10 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card" style="box-shadow:0 0 7px 0 rgba(30,5,0,0.15); border-radius:10px;">
                     <div class="card-body">
                         <button type="button" class="btn btn-light btn-sm mt-2 mb-2" href="#" data-bs-toggle="modal"
-                            data-bs-target="#modalTambahDataPaketPelayananNotaris"><i class="bi bi-plus"></i> Tambah Paket
+                            data-bs-target="#modalTambahDataPaketPelayananNotaris"><i class="bi bi-plus"></i> Tambah
                             Pelayanan Notaris</button>
 
                         <div class="modal fade text-left" id="modalTambahDataPaketPelayananNotaris"
@@ -15,7 +15,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel33">Tambah Paket Pelayanan Notaris</h4>
+                                        <h4 class="modal-title" id="myModalLabel33">Tambah Pelayanan Notaris</h4>
                                         <button type="button" class="close batal" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <i data-feather="x"></i>
@@ -33,19 +33,17 @@
                                                         placeholder="Masukkan Nama Paket Pelayanan Notaris">
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text p_pel_notaris_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger                     error-text p_pel_notaris_error"></label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="col col-form-label" for="path">Gambar</label>
-                                                    <input type="file" accept="image/*" name="path"
-                                                        class="form-control">
+                                                    <input type="file" accept="image/png, image/jpeg, image/jpg"
+                                                        name="path" id="tambah_p_pel_notaris_path" class="form-control">
                                                     <div class="input-group has-validation">
                                                         <label
-                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                                                error-text path_error"></label>
+                                                            style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger                     error-text path_error"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -57,8 +55,11 @@
                                                 data-bs-dismiss="modal">
                                                 Batal
                                             </button>
-                                            <button type="submit" class="btn btn-primary ml-1">
-                                                Simpan
+                                            <button type="submit" class="btn btn-primary ml-1"
+                                                id="button-tambah-layanan-notaris">
+                                                <i id="icon-button-tambah-layanan-notaris"></i>
+                                                <span id="text-tambah-layanan-notaris" class="d-none d-sm-block">
+                                                    Simpan</span>
                                             </button>
                                         </div>
                                     </form>
@@ -87,7 +88,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel33">Ubah Kategori</h4>
+                    <h4 class="modal-title" id="myModalLabel33">Ubah Pelayanan Notaris</h4>
                     <button type="button" class="close batal" data-bs-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
@@ -102,17 +103,18 @@
                                 <input name="p_pel_notaris" id="p_pel_notaris" class="form-control"
                                     placeholder="Masukkan Nama Pelayanan Notaris">
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text p_pel_notaris_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text p_pel_notaris_error"></label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col col-form-label" for="path">Gambar</label>
-                                <input type="file" accept="image/*" name="path" id="path" class="form-control">
+                                <input type="file" accept="image/png, image/jpeg, image/jpg" name="path"
+                                    id="edit_p_pel_notaris_path" class="form-control">
                                 <div class="input-group has-validation">
-                                    <label style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger
-                                            error-text path_error"></label>
+                                    <label
+                                        style="margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; "class="text-danger error-text path_error"></label>
                                 </div>
                             </div>
                         </div>
@@ -122,8 +124,10 @@
                         <button type="button" class="btn btn-light-secondary batal" data-bs-dismiss="modal">
                             Batal
                         </button>
-                        <button type="submit" class="btn btn-primary ml-1">
-                            Simpan
+                        <button type="submit" class="btn btn-primary ml-1" id="button-edit-layanan-notaris">
+                            <i id="icon-button-edit-layanan-notaris"></i>
+                            <span id="text-edit-layanan-notaris" class="d-none d-sm-block">
+                                Simpan</span>
                         </button>
                     </div>
                 </form>
@@ -200,8 +204,37 @@
             ]
         });
 
+        $(document).ready(function(e) {
+            $("#edit_p_pel_notaris_path, #tambah_p_pel_notaris_path").change(function() {
+                let file = this.files[0];
+                let reader = new FileReader();
+                var ext = $('#edit_p_pel_notaris_path, #tambah_p_pel_notaris_path').val().split('.').pop()
+                    .toLowerCase();
+                if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
+                    $(document).find('label.error-text.path_error').html(
+                        "<label style='margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; 'class='text-danger error-text path_error'>Format gambar yang diizinkan jpeg, jpg dan png</label>"
+                    );
+                    $("#edit_p_pel_notaris_path, #tambah_p_pel_notaris_path").val(null);
+                } else {
+                    if (file['size'] < 1111775) {
+                        $(document).find('label.error-text.path_error').text('');
+                        reader.readAsDataURL(this.files[0]);
+                    } else if (file['size'] > 1111775) {
+                        $(document).find('label.error-text.path_error').html(
+                            "<label style='margin-top: 0.1rem; font-size: 0.8rem; font-weight: 600; 'class='text-danger error-text path_error'>Ukuran gambar maksimal 1MB</label>"
+                        );
+                        $("#edit_p_pel_notaris_path, #tambah_p_pel_notaris_path").val(null);
+                    }
+                }
+            });
+        });
+
         $('#formTambahDataPaketPelayananNotaris').on('submit', function(e) {
             e.preventDefault();
+            var $search = $("#icon-button-tambah-layanan-notaris")
+            $("#icon-button-tambah-layanan-notaris").addClass("fa fa-spinner fa-spin")
+            $("#text-tambah-layanan-notaris").html('')
+            $("#button-tambah-layanan-notaris").prop('disabled', true);
             $.ajax({
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
@@ -214,12 +247,19 @@
                     $(document).find('label.error-text').text('');
                 },
                 success: function(data) {
-                    if (data.status == 0) {
+                    if (data.status_form_kosong == 1) {
                         $.each(data.error, function(prefix, val) {
                             $('label.' + prefix + '_error').text(val[0]);
                             // $('span.'+prefix+'_error').text(val[0]);
                         });
-                    } else if (data.status == 1) {
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-tambah-layanan-notaris").html(
+                            '<span id="text-tambah-layanan-notaris" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-tambah-layanan-notaris").prop('disabled', false);
+                    } else if (data.status_berhasil == 1) {
+                        $("#formTambahDataPaketPelayananNotaris").trigger('reset');
+                        $("#modalTambahDataPaketPelayananNotaris").modal('hide')
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -238,9 +278,13 @@
                             icon: 'success',
                             title: data.msg
                         })
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-tambah-layanan-notaris").html(
+                            '<span id="text-tambah-layanan-notaris" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-tambah-layanan-notaris").prop('disabled', false);
+                        $(document).find('label.error-text').text('');
                         table_data_paket_pelayanan_notaris.draw();
-                        $("#formTambahDataPaketPelayananNotaris").trigger('reset');
-                        $("#modalTambahDataPaketPelayananNotaris").modal('hide')
                     }
                 },
             });
@@ -267,11 +311,14 @@
 
         $("#formEditDataPaketPelayananNotaris").submit(function(e) {
             e.preventDefault();
-            const fd = new FormData(this);
+            var $search = $("#icon-button-edit-layanan-notaris")
+            $("#icon-button-edit-layanan-notaris").addClass("fa fa-spinner fa-spin")
+            $("#text-edit-layanan-notaris").html('')
+            $("#button-edit-layanan-notaris").prop('disabled', true);
             $.ajax({
                 url: "{{ route('admin.ProsesEditPaketPelayananNotaris') }}",
-                method: 'post',
-                data: fd,
+                method: 'POST',
+                data: new FormData(this),
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -282,8 +329,14 @@
                             $('label.' + prefix + '_error').text(val[0]);
                             // $('span.'+prefix+'_error').text(val[0]);
                         });
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-edit-layanan-notaris").html(
+                            '<span id="text-edit-layanan-notaris" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-edit-layanan-notaris").prop('disabled', false);
                     } else if (data.status_berhasil_ubah == 1) {
                         $("#modalEditDataPaketPelayananNotaris").modal('hide');
+                        $("#formEditDataPaketPelayananNotaris")[0].reset();
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -301,8 +354,13 @@
                             icon: 'success',
                             title: data.msg
                         })
-                        $("#formEditDataPaketPelayananNotaris")[0].reset();
-                        table_data_paket_pelayanan_notaris.ajax.reload(null, false);
+                        $search.removeClass("fa fa-spinner fa-spin")
+                        $("#text-edit-layanan-notaris").html(
+                            '<span id="text-edit-layanan-notaris" class="d-none d-sm-block">Simpan</span>'
+                        )
+                        $("#button-edit-layanan-notaris").prop('disabled', false);
+                        $(document).find('label.error-text').text('');
+                        table_data_paket_pelayanan_notaris.draw();
                     }
                 }
             });

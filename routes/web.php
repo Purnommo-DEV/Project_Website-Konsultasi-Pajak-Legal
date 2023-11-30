@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Admin_DashboardController;
+use App\Http\Controllers\Admin\Admin_LayananSatuanController;
 use App\Http\Controllers\Admin\Admin_PaketBundlingPajakController;
 use App\Http\Controllers\Admin\Admin_PaketNotarisController;
 use App\Http\Controllers\Admin\Admin_PaketPajakController;
@@ -52,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::controller(Admin_PaketBundlingPajakController::class)->group(function () {
-            Route::get('/paket-bundling-pajak', 'halaman_paket_bundling_pajak')->name('DataMaster.PaketBundlingPajak');
+            Route::get('/paket-bundling-pajak', 'halaman_paket_bundling_pajak')->name('DataMaster.PaketBundlingPajak.HalamanPaketBundlingPajak');
             Route::post('/tambah-paket-bundling-pajak', 'tambah_paket_bundling_pajak')->name('TambahDataPaketBundlingPajak');
             Route::any('/data-paket-bundling-pajak', 'data_paket_bundling_pajak')->name('DataPaketBundlingPajak');
             Route::get('/tampil-data-paket-bundling-pajak/{paket_pakjak_id}', 'tampil_data_paket_bundling_pajak');
@@ -78,14 +79,39 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::controller(Admin_PaketNotarisController::class)->group(function () {
-            Route::get('/paket-pelayanan-notaris', 'halaman_paket_pelayanan_notaris')->name('DataMaster.PaketPelayananNotaris');
+            Route::get('/paket-pelayanan-notaris', 'halaman_paket_pelayanan_notaris')->name('DataMaster.PaketPelayananNotaris.HalamanPaketPelayananNotaris');
             Route::post('/tambah-paket-pelayanan-notaris', 'tambah_paket_pelayanan_notaris')->name('TambahDataPaketPelayananNotaris');
             Route::any('/data-paket-pelayanan-notaris', 'data_paket_pelayanan_notaris')->name('DataPaketPelayananNotaris');
             Route::get('/tampil-data-paket-pelayanan-notaris/{paket_pakjak_id}', 'tampil_data_paket_pelayanan_notaris');
             Route::post('/proses-edit-paket-pelayanan-notaris', 'proses_edit_data_paket_pelayanan_notaris')->name('ProsesEditPaketPelayananNotaris');
             Route::get('/hapus-data-paket-pelayanan-notaris/{paket_pakjak_id}', 'hapus_data_paket_pelayanan_notaris');
 
-            Route::get('/detail-paket-pelayanan-notaris/{slug}', 'halaman_detail_paket_pelayanan_notaris')->name('DataMaster.PaketPelayananNotaris.DetailPaketPelayananNotaris');
+            Route::get('/detail-paket-pelayanan-notaris/{slug}', 'halaman_detail_paket_pelayanan_notaris')->name('DataMaster.PaketPelayananNotaris.DetailPaketPelayananNotarisChild1');
+            Route::post('/tambah-paket-pelayanan-notaris-child1', 'tambah_paket_pelayanan_notaris_child1')->name('ProsesTambahDataPaketPelayananNotarisChild1');
+            Route::any('/data-paket-pelayanan-notaris-child1', 'data_paket_pelayanan_notaris_child1')->name('DataPaketPelayananNotarisChild1');
+            Route::get('/tampil-data-paket-pelayanan-notaris-child1/{p_pel_notaris_child1}', 'tampil_data_paket_pelayanan_notaris_child1');
+            Route::post('/proses-edit-paket-pelayanan-notaris-child1', 'proses_edit_data_paket_pelayanan_notaris_child1')->name('ProsesEditPaketPelayananNotarisChild1');
+            Route::get('/hapus-data-paket-pelayanan-notaris-child1/{p_pel_notaris_child1}', 'hapus_data_paket_pelayanan_notaris_child1');
+        });
+
+        Route::controller(Admin_LayananSatuanController::class)->group(function () {
+            Route::get('/layanan-satuan', 'halaman_layanan_satuan')->name('DataMaster.LayananSatuan.HalamanLayananSatuan');
+            Route::post('/tambah-layanan-satuan', 'tambah_layanan_satuan')->name('ProsesTambahDataLayananSatuan');
+            Route::any('/data-layanan-satuan', 'data_layanan_satuan')->name('DataLayananSatuan');
+            Route::get('/tampil-data-layanan-satuan/{layanan_satuan_id}', 'tampil_data_layanan_satuan');
+            Route::post('/proses-edit-layanan-satuan', 'proses_edit_data_layanan_satuan')->name('ProsesEditLayananSatuan');
+            Route::get('/hapus-data-layanan-satuan/{layanan_satuan_id}', 'hapus_data_layanan_satuan');
+
+            Route::get('/detail-layanan-satuan/{slug}', 'halaman_detail_layanan_satuan')->name('DataMaster.LayananSatuan.DetailLayananSatuanChild1');
+            Route::post('/tambah-layanan-satuan-child1', 'tambah_layanan_satuan_child1')->name('ProsesTambahDataLayananSatuanChild1');
+            Route::get('/tampil-data-layanan-satuan-child1/{layanan_satuan_child1}', 'tampil_data_layanan_satuan_child1');
+            Route::post('/proses-edit-layanan-satuan-child1', 'proses_edit_data_layanan_satuan_child1')->name('ProsesEditLayananSatuanChild1');
+            Route::get('/hapus-data-layanan-satuan-child1/{layanan_satuan_child1}', 'hapus_data_layanan_satuan_child1');
+
+            Route::post('/tambah-layanan-satuan-child2', 'tambah_layanan_satuan_child2')->name('ProsesTambahDataLayananSatuanChild2');
+            Route::get('/tampil-data-layanan-satuan-child2/{layanan_satuan_child2}', 'tampil_data_layanan_satuan_child2');
+            Route::post('/proses-edit-layanan-satuan-child2', 'proses_edit_data_layanan_satuan_child2')->name('ProsesEditLayananSatuanChild2');
+            Route::get('/hapus-data-layanan-satuan-child2/{layanan_satuan_child2}', 'hapus_data_layanan_satuan_child2');
         });
     });
 

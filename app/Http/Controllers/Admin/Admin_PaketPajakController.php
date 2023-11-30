@@ -41,12 +41,10 @@ class Admin_PaketPajakController extends Controller
             'paket' => 'required',
             'isi' => 'required',
             'tarif' => 'required',
-            'path' => 'required',
         ], [
             'paket.required' => 'Wajib diisi',
             'isi.required' => 'Wajib diisi',
             'tarif.required' => 'Wajib diisi',
-            'path.required' => 'Wajib diisi',
         ]);
 
         if (!$validator->passes()) {
@@ -63,11 +61,11 @@ class Admin_PaketPajakController extends Controller
                 $path = $request->file('path')->store('gambar_paket_pajak', 'public');
             }
             $tambah_paket_pajak = PaketPajak::create([
-                'paket' => $request->paket,
+                'paket' =>  help_hapus_spesial_karakter($request->paket),
                 'slug' => Str::slug($request->paket),
-                'isi' => $request->isi,
+                'isi' =>  help_hapus_spesial_karakter($request->isi),
                 'tarif' => help_hapus_format_rupiah($request->tarif),
-                'keterangan' => $request->keterangan,
+                'keterangan' => help_hapus_spesial_karakter($request->keterangan),
                 'path' => $path
             ]);
 
@@ -126,11 +124,11 @@ class Admin_PaketPajakController extends Controller
                 $path = $data_paket_pajak->path;
             }
             $ubah_paket_pajak = $data_paket_pajak->update([
-                'paket' => $request->paket,
+                'paket' => help_hapus_spesial_karakter($request->paket),
                 'slug' => Str::slug($request->paket),
-                'isi' => $request->isi,
-                'tarif' => str_replace(['Rp. ', '.', '.'], ['', '', ''], $request->tarif),
-                'keterangan' => $request->keterangan,
+                'isi' => help_hapus_spesial_karakter($request->isi),
+                'tarif' => help_hapus_format_rupiah($request->tarif),
+                'keterangan' => help_hapus_spesial_karakter($request->keterangan),
                 'path' => $path
             ]);
 
